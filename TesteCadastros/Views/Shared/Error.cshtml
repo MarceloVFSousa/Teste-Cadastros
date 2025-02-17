@@ -1,0 +1,25 @@
+﻿@model ErrorViewModel
+@{
+    ViewData["Title"] = "Error";
+}
+
+<h1 class="text-danger">Erro.</h1>
+<h2 class="text-danger">Ocorreu um erro ao processar o seu pedido.</h2>
+
+@if (Model.ShowRequestId)
+{
+    <p>
+        <strong>Request ID:</strong> <code>@Model.RequestId</code>
+    </p>
+}
+
+<h3>Development Mode</h3>
+<p>
+    Trocar para o ambiente <strong>Development</strong> irá mostrar informações mais detalhadas sobre o erro ocorrido.
+</p>
+<p>
+    <strong>O ambiente de desenvolvimento não deveria não deveria estar habilitado para aplicações publicadas.</strong>
+    Pode resultar em informação sensivel sendo disponibilizada a partir das exceções para usuários finais.
+    Para debuggind local, habilite o <strong>Development</strong> ambiente configurando a<strong>ASPNETCORE_ENVIRONMENT</strong> variável de ambiente <strong>Development</strong>
+    e reiniciando a aplicação/.
+</p>
