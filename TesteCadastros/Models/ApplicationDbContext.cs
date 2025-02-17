@@ -2,9 +2,7 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
-using TesteCadastros.Controllers;
 using TesteCadastros.Models;
-using TesteCadastros.ViewModels;
 
 namespace TesteCadastros.Data
 {
@@ -13,6 +11,21 @@ namespace TesteCadastros.Data
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
+            try
+            {
+                if (Database.CanConnect())
+                {
+                    Console.WriteLine("Conexão com o banco de dados estabelecida com sucesso!");
+                }
+                else
+                {
+                    Console.WriteLine("Falha ao conectar com o banco de dados!");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Erro ao verificar conexão com o banco: {ex.Message}");
+            }
         }
 
         protected override void OnModelCreating(ModelBuilder builder)
@@ -41,11 +54,6 @@ namespace TesteCadastros.Data
                 .HasKey(ut => new { ut.UserId, ut.LoginProvider, ut.Name });
         }
 
-        // Adicione aqui DbSets para outras entidades do seu projeto, caso necessário
-        // public DbSet<OutraEntidade> OutraEntidades { get; set; }
         public DbSet<Produto> Produtos { get; set; }
-
-
     }
-
 }
