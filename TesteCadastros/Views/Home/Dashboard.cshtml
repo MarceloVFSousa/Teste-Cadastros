@@ -1,43 +1,39 @@
-﻿@model TesteCadastros.ViewModels.DashboardViewModel
+﻿@model List<TesteCadastros.ViewModels.ProdutoViewModel>
 
 @{
-    ViewData["Title"] = "Logado";
+    ViewData["Title"] = "Dashboard";
 }
 
-<h2>@ViewData["Title"]</h2>
+<div class="container mt-4">
+    <h2 class="mb-4">Lista de Produtos Cadastrados</h2>
 
-<div class="container">
-
-
-<table class="table table-dark table-hover">
-    <thead>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">First</th>
-            <th scope="col">Last</th>
-            <th scope="col">Handle</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@@mdo</td>
-        </tr>
-        <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@@fat</td>
-        </tr>
-        <tr>
-            <th scope="row">3</th>
-            <td>Larry</td>
-            <td>the Bird</td>
-            <td>@@twitter</td>
-        </tr>
-    </tbody>
-</table>
-
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Produto</th>
+                <th>Preço</th>
+                <th>Data de Registro</th>
+                <th>Data de Previsão</th>
+                <th>Cidade</th>
+                <th>Estado</th>
+                <th>CEP</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var produto in Model)
+            {
+                <tr>
+                    <td>@produto.Id</td>
+                    <td>@produto.NomeProduto</td>
+                    <td>@(decimal.TryParse(produto.Preco, out var preco) ? preco.ToString("C") : produto.Preco)</td>
+                    <td>@produto.DataRegistro.ToString("dd/MM/yyyy")</td>
+                    <td>@produto.DataPrevisao.ToString("dd/MM/yyyy")</td>
+                    <td>@produto.Cidade</td>
+                    <td>@produto.Estado</td>
+                    <td>@produto.Cep</td>
+                </tr>
+            }
+        </tbody>
+    </table>
 </div>
