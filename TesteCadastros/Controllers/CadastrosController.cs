@@ -15,6 +15,12 @@ namespace TesteCadastros.Controllers
             _context = context;
         }
 
+        public IActionResult CadastroSucesso()
+        {
+            return View();
+        }
+
+
         [HttpGet]
         public IActionResult Cadastros()
         {
@@ -24,27 +30,49 @@ namespace TesteCadastros.Controllers
         [HttpPost]
         public async Task<IActionResult> Cadastros(Produto model)
         {
+            Console.WriteLine("Método POST Cadastros foi chamado!");
+
             if (!ModelState.IsValid)
             {
+                Console.WriteLine("❌ ModelState inválido!");
+                foreach (var error in ModelState.Values.SelectMany(v => v.Errors))
+                {
+                    Console.WriteLine($"Erro: {error.ErrorMessage}");
+                }
                 TempData["MensagemErro"] = "Preencha todos os campos corretamente.";
                 return View(model);
             }
 
             try
             {
-                model.DataRegistro = DateTime.Now.ToString(); // Define a data de registro automática
+                model.DataRegistro = DateTime.Now;
+                Console.WriteLine($"Dados Recebidos -> Nome: {model.NomeProduto}, Preço: {model.Preco}");
+
+                Console.WriteLine("Antes de salvar no banco");
                 _context.Produtos.Add(model);
-                await _context.SaveChangesAsync();
+                Console.WriteLine("Salvando no banco...");
+                var rowsAffected = await _context.SaveChangesAsync();
+
+                if (rowsAffected > 0)
+                {
+                    Console.WriteLine("Produto salvo com sucesso no banco!");
+                }
+                else
+                {
+                    Console.WriteLine("Nenhum registro foi salvo!");
+                }
 
                 TempData["MensagemSucesso"] = "Produto cadastrado com sucesso!";
-                return RedirectToAction("Cadastros");
+                //return RedirectToAction("Cadastros");
+                return RedirectToAction("CadastroSucesso", "Home");
             }
             catch (Exception ex)
             {
-                TempData["MensagemErro"] = "Erro ao cadastrar o produto. Tente novamente.";
-                Console.WriteLine(ex.Message); // Apenas para debug
+                Console.WriteLine($"Erro: {ex.Message} | StackTrace: {ex.StackTrace}");
+                TempData["MensagemErro"] = "Erro ao cadastrar o produto. Verifique o console.";
                 return View(model);
             }
         }
+
     }
 }

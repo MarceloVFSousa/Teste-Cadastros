@@ -11,7 +11,7 @@ namespace TesteCadastros.Models
         [Required]
         public string Preco { get; set; }
         //[Required]
-        public string DataRegistro { get; set; }
+        public DateTime DataRegistro { get; set; }
         [Required]
         public string DataPrevisao { get; set; }
         [Required]

@@ -8,16 +8,13 @@
     <h2 class="mb-4">Cadastro de Produto</h2>
 
     <!-- Exibir mensagens de sucesso ou erro -->
-    @if (TempData["MensagemSucesso"] != null)
-    {
-        <div class="alert alert-success">@TempData["MensagemSucesso"]</div>
-    }
     @if (TempData["MensagemErro"] != null)
     {
         <div class="alert alert-danger">@TempData["MensagemErro"]</div>
     }
 
-    <form asp-action="Cadastros" method="post">
+    <!-- <form asp-controller="Views" asp-action="Cadastros" method="post">-->
+    <form asp-controller="Cadastros" asp-action="Cadastros" method="post">
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label asp-for="NomeProduto">Produto</label>
@@ -85,7 +82,7 @@
                 <span asp-validation-for="Cep" class="text-danger"></span>
             </div>
         </div>
-        <button type="submit" class="btn btn-primary">Cadastros</button>
+        <button type="submit" class="btn btn-primary">Cadastrar</button>
     </form>
 </div>
 

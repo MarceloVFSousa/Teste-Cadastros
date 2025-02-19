@@ -7,6 +7,7 @@ using TesteCadastros.Data;
 using TesteCadastros.Models;
 using TesteCadastros.Services;
 
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Configuração do banco de dados
@@ -42,6 +43,25 @@ builder.Services.AddControllersWithViews();
 
 // Criar o app
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    var logger = services.GetRequiredService<ILogger<Program>>();
+
+    try
+    {
+        var dbContext = services.GetRequiredService<ApplicationDbContext>();
+        dbContext.Database.CanConnect(); // Testa a conexão com o banco
+        Console.WriteLine("Conexão com o banco de dados estabelecida com sucesso!");
+        logger.LogInformation("Conexão com o banco de dados estabelecida com sucesso!");
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"Erro ao conectar no banco: {ex.Message}");
+        logger.LogError(ex, "Erro ao conectar no banco de dados");
+    }
+}
 
 // Criar roles e admin automaticamente
 using (var scope = app.Services.CreateScope())
