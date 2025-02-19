@@ -64,7 +64,7 @@ namespace TesteCadastros.Controllers
 
                 TempData["MensagemSucesso"] = "Produto cadastrado com sucesso!";
                 //return RedirectToAction("Cadastros");
-                return RedirectToAction("CadastroSucesso", "Home");
+                return RedirectToAction("CadastroSucesso", "Cadastros");
             }
             catch (Exception ex)
             {

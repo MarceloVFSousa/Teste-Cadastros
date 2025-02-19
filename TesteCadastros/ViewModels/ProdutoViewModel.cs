@@ -1,27 +1,14 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace TesteCadastros.Models
+﻿namespace TesteCadastros.ViewModels
 {
-    public class Produto
+    public class ProdutoViewModel
     {
-        [Key]
         public int Id { get; set; }
-        [Required]
         public string NomeProduto { get; set; }
-        [Required]
         public string Preco { get; set; }
-        //[Required]
         public DateTime DataRegistro { get; set; }
-        [Required]
         public DateTime DataPrevisao { get; set; }
-        [Required]
         public string Cidade { get; set; }
-        [Required]
         public string Estado { get; set; }
-        [Required]
         public string Cep { get; set; }
-
-
-
     }
 }
