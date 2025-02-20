@@ -1,40 +1,42 @@
-﻿@model TesteCadastros.Models.Produto
+﻿@model TesteCadastros.Models.Cliente
 
 @{
-    ViewData["Title"] = "Cadastro de Produto";
+    ViewData["Title"] = "Cadastro Bem-Sucedido";
 }
 
 <div class="container mt-4">
-    <h2 class="mb-4">Cadastro de Produto</h2>
-
-    <!-- Exibir mensagens de sucesso ou erro -->
-    @if (TempData["MensagemErro"] != null)
+    @if (TempData["MensagemSucesso"] != null)
     {
-        <div class="alert alert-danger">@TempData["MensagemErro"]</div>
+        <div class="alert alert-success">@TempData["MensagemSucesso"]</div>
+        <p>O produto foi cadastrado corretamente no sistema.</p>
+        <a href="@Url.Action("Cadastros", "Cadastros")" class="btn btn-primary">Voltar</a>
     }
+    else if (TempData["MensagemSucesso2"] != null)
+    {
+        <div class="alert alert-success">@TempData["MensagemSucesso2"]</div>
+        <p>O cliente foi cadastrado corretamente no sistema.</p>
+        <a href="@Url.Action("CadastroClientes", "Cadastros")" class="btn btn-primary">Voltar</a>
+    }
+</div>
+
 
     <!-- <form asp-controller="Views" asp-action="Cadastros" method="post">-->
-    <form asp-controller="Cadastros" asp-action="Cadastros" method="post">
+    <form asp-controller="Cadastros" asp-action="CadastroClientes" method="post">
         <div class="form-row">
             <div class="form-group col-md-6">
-                <label asp-for="NomeProduto">Produto</label>
-                <input asp-for="NomeProduto" class="form-control" placeholder="Produto" required>
-                <span asp-validation-for="NomeProduto" class="text-danger"></span>
+                <label asp-for="NomeCliente">Cliente</label>
+                <input asp-for="NomeCliente" class="form-control" placeholder="Cliente" required>
+                <span asp-validation-for="NomeCliente" class="text-danger"></span>
             </div>
             <div class="form-group col-md-6">
-                <label asp-for="Preco">Preço</label>
-                <input asp-for="Preco" class="form-control" placeholder="Preço" required>
-                <span asp-validation-for="Preco" class="text-danger"></span>
+            <label asp-for="Cnpj">CNPJ</label>
+            <input asp-for="Cnpj" class="form-control" placeholder="CNPJ" id="cnpj" required>
+            <span asp-validation-for="Cnpj" class="text-danger"></span>
             </div>
         </div>
         <div class="form-group">
             <label asp-for="DataRegistro">Data de registro</label>
             <input asp-for="DataRegistro" type="text" class="form-control" value="@DateTime.Now.ToString("dd/MM/yyyy")" readonly>
-        </div>
-        <div class="form-group">
-            <label asp-for="DataPrevisao">Data de previsão de entrega</label>
-            <input asp-for="DataPrevisao" type="date" class="form-control" required min="@DateTime.Now.ToString("yyyy-MM-dd")">
-            <span asp-validation-for="DataPrevisao" class="text-danger"></span>
         </div>
         <div class="form-row">
             <div class="form-group col-md-6">
@@ -77,9 +79,9 @@
                 <span asp-validation-for="Estado" class="text-danger"></span>
             </div>
             <div class="form-group col-md-2">
-                <label asp-for="Cep">CEP</label>
-                <input asp-for="Cep" class="form-control" placeholder="CEP" id="cep" required>
-                <span asp-validation-for="Cep" class="text-danger"></span>
+                <label asp-for="RamoDeAtividade">Ramo de Atividade</label>
+                <input asp-for="RamoDeAtividade" class="form-control" placeholder="Ramo de Atividade" required>
+                <span asp-validation-for="RamoDeAtividade" class="text-danger"></span>
             </div>
         </div>
         <button type="submit" class="btn btn-primary">Cadastrar</button>

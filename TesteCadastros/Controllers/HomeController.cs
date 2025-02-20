@@ -29,7 +29,7 @@ public class HomeController : Controller
     }
 
     public IActionResult Dashboard()
-    {
+    {   
         var produtos = _context.Produtos
             .Select(p => new ProdutoViewModel
             {
@@ -45,9 +45,15 @@ public class HomeController : Controller
             .ToList();
 
         return View(produtos);
+
     }
 
     public IActionResult Cadastros() 
+    {
+        return View();
+    }
+
+    public IActionResult CadastroClientes()
     {
         return View();
     }

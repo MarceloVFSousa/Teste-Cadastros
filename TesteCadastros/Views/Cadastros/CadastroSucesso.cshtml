@@ -1,13 +1,15 @@
 ﻿@{
     ViewData["Title"] = "Cadastro Bem-Sucedido";
+    var tipoCadastro = TempData["TipoCadastro"] as string;
 }
 
 <div class="container mt-4">
     @if (TempData["MensagemSucesso"] != null)
     {
         <div class="alert alert-success">@TempData["MensagemSucesso"]</div>
+        <p>O @tipoCadastro.ToLower() foi cadastrado corretamente no sistema.</p>
+        <a href="@Url.Action(tipoCadastro == "Produto" ? "Cadastros" : "CadastroClientes", "Cadastros")" class="btn btn-primary">
+            Voltar para o Cadastro de @tipoCadastro
+        </a>
     }
-    <p>O produto foi cadastrado corretamente no sistema.</p>
-
-    <a href="@Url.Action("Cadastros", "Cadastros")" class="btn btn-primary">Voltar para o Cadastro</a>
 </div>

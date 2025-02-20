@@ -2,24 +2,24 @@
 
 namespace TesteCadastros.Models
 {
-    public class Produto
+    public class Cliente
     {
         [Key]
         public int Id { get; set; }
         [Required]
-        public string NomeProduto { get; set; }
+        public string NomeCliente { get; set; }
         [Required]
-        public string Preco { get; set; }
+        public string Cnpj { get; set; }
         //[Required]
         public DateTime DataRegistro { get; set; }
-        [Required]
-        public DateTime DataPrevisao { get; set; }
         [Required]
         public string Cidade { get; set; }
         [Required]
         public string Estado { get; set; }
         [Required]
-        public string Cep { get; set; }
+        public string RamoDeAtividade { get; set; }
+
+
 
     }
 }
