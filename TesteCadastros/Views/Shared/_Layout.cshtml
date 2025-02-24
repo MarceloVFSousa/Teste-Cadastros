@@ -24,15 +24,6 @@
                         <li class="nav-item">
                             <a class="nav-link" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-controller="Home" asp-action="Dashboard">Dashboard</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-controller="Cadastros" asp-action="Cadastros">Cadastro de Produtos</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-controller="Cadastros" asp-action="CadastroClientes">Cadastro de Clientes</a>
-                        </li>
                     </ul>
 
                     <ul class="navbar-nav">
@@ -40,6 +31,15 @@
                         {
                             <li class="nav-item">
                                 <span class="navbar-text">Olá, @User.Identity.Name!</span>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Home" asp-action="Dashboard">Dashboard de Cadastros</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Cadastros" asp-action="Cadastros">Cadastro de Produtos</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Cadastros" asp-action="CadastroClientes">Cadastro de Clientes</a>
                             </li>
                             <li class="nav-item">
                                 <form asp-controller="Account" asp-action="Logout" method="post" class="form-inline">
