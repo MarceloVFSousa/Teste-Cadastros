@@ -93,10 +93,16 @@ app.UseAuthorization();
 //name: "default",
 //pattern: "{controller=Account}/{action=Login}/{id?}");
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Account}/{action=Login}/{id?}");
+//app.MapControllerRoute(
+//name: "default",
+//pattern: "{controller=Account}/{action=Login}/{id?}");
 
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllerRoute(
+        name: "default",
+        pattern: "{controller=Home}/{action=Index}/{id?}"); // Define Home como página inicial
+});
 
 
 app.Run();
