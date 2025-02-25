@@ -1,4 +1,5 @@
-﻿@model List<TesteCadastros.ViewModels.ProdutoViewModel>
+﻿@using X.PagedList.Mvc.Core
+@model TesteCadastros.ViewModels.DashboardViewModel
 
 @{
     ViewData["Title"] = "Dashboard";
@@ -20,13 +21,13 @@
                     <h4 class="text-center">Tabelas</h4>
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                            <a class="nav-link active" href="#produtos">
+                            <a class="nav-link active" href="#" onclick="mostrarTabela('produtos')">
                                 <img src="~/developer-solid-2-31-512.webp" alt="Ícone de Produtos" class="img-fluid" style="width: 20px; height: 20px; margin-right: 5px;" />
                                 Produtos
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" href="#clientes">
+                            <a class="nav-link active" href="#" onclick="mostrarTabela('clientes')">
                                 <img src="~/developer-solid-2-31-512.webp" alt="Ícone de Clientes" class="img-fluid" style="width: 20px; height: 20px; margin-right: 5px;" />
                                 Clientes
                             </a>
@@ -39,7 +40,7 @@
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
                 <h2 class="mt-4">Dashboard</h2>
 
-                <!-- Seção da Tabela de Produtos -->
+                <!-- Seção da Tabela de Produtos (Visível por padrão) -->
                 <section id="produtos" class="mt-4">
                     <h3>Lista de Produtos</h3>
                     <div class="table-responsive">
@@ -56,7 +57,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach (var produto in Model)
+                                @foreach (var produto in Model.Produtos) 
                                 {
                                     <tr>
                                         <td>@produto.NomeProduto</td>
@@ -72,7 +73,70 @@
                         </table>
                     </div>
                 </section>
+
+                    <!-- Paginação de Produtos -->
+                    <div class="d-flex justify-content-center">
+                        @Html.PagedListPager(Model.Produtos, pagina => Url.Action("Dashboard", new { paginaProdutos = pagina }), new PagedListRenderOptions { Display = PagedListDisplayMode.IfNeeded })
+                    </div>
+                </section>
+
+
+                <!-- Seção da Tabela de Clientes (Oculta por padrão) -->
+                <section id="clientes" class="mt-4" style="display: none;">
+                    <h3>Lista de Clientes</h3>
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Cliente</th>
+                                    <th>CNPJ</th>
+                                    <th>Data de Registro</th>
+                                    <th>Cidade</th>
+                                    <th>Estado</th>
+                                    <th>Ramo de Atividade</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var cliente in Model.Clientes)
+                                {
+                                    <tr>
+                                        <td>@cliente.NomeCliente</td>
+                                        <td>@cliente.CNPJ</td>
+                                        <td>@cliente.DataRegistro.ToString("dd/MM/yyyy")</td>
+                                        <td>@cliente.Cidade</td>
+                                        <td>@cliente.Estado</td>
+                                        <td>@cliente.RamoDeAtividade</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
             </main>
         </div>
     </div>
+
+    <!-- Paginação de Clientes -->
+    <div class="d-flex justify-content-center">
+        @Html.PagedListPager(Model.Clientes, pagina => Url.Action("Dashboard", new { paginaClientes = pagina }), new PagedListRenderOptions { Display = PagedListDisplayMode.IfNeeded })
+    </div>
+    </section>
 </body>
+
+<!-- SEÇÃO DE SCRIPTS -->
+
+<script>
+    function mostrarTabela(tabela) {
+        // Esconde todas as tabelas
+        document.getElementById('produtos').style.display = 'none';
+        document.getElementById('clientes').style.display = 'none';
+
+        // Exibe apenas a tabela selecionada
+        document.getElementById(tabela).style.display = 'block';
+    }
+
+    // Garante que a tabela de produtos seja visível por padrão
+    document.addEventListener("DOMContentLoaded", function () {
+        mostrarTabela('produtos');
+    });
+</script>

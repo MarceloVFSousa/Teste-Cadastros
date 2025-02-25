@@ -33,7 +33,7 @@
                                 <span class="navbar-text">Olá, @User.Identity.Name!</span>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" asp-controller="Home" asp-action="Dashboard">Dashboard de Cadastros</a>
+                                <a class="nav-link" asp-controller="Dashboard" asp-action="Dashboard">Dashboard de Cadastros</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" asp-controller="Cadastros" asp-action="Cadastros">Cadastro de Produtos</a>
@@ -82,8 +82,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
     <script>
         $(document).ready(function() {
-            $('#cep').mask('00000-000'); // Máscara para CEP (Formato: 12345-678)
-            $('#cnpj').mask('00.000.000/0000-00'); // Máscara para CNPJ (Formato: 12.345.678/0001-99)
+            $('#cep').mask('00000-000'); // Máscara para CEP (Formato: 00000-000)
+            $('#cnpj').mask('00.000.000/0000-00'); // Máscara para CNPJ (Formato: 00.000.000/0000-00)
         });
     </script>
 

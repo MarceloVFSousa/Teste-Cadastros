@@ -28,25 +28,31 @@ public class HomeController : Controller
         return View();
     }
 
-    public IActionResult Dashboard()
-    {   
-        var produtos = _context.Produtos
-            .Select(p => new ProdutoViewModel
-            {
-                Id = p.Id,
-                NomeProduto = p.NomeProduto,
-                Preco = p.Preco,
-                DataRegistro = p.DataRegistro,
-                DataPrevisao = p.DataPrevisao,
-                Cidade = p.Cidade,
-                Estado = p.Estado,
-                Cep = p.Cep
-            })
-            .ToList();
+    //public IActionResult Dashboard()
+    //{
+        //return View();
 
-        return View(produtos);
+    //}
 
-    }
+    //public IActionResult Dashboard()
+    //{   
+        //var produtos = _context.Produtos
+            //.Select(p => new ProdutoViewModel
+            //{
+                //Id = p.Id,
+                //NomeProduto = p.NomeProduto,
+               // Preco = p.Preco,
+                //DataRegistro = p.DataRegistro,
+                //DataPrevisao = p.DataPrevisao,
+                //Cidade = p.Cidade,
+                //Estado = p.Estado,
+                //Cep = p.Cep
+            //})
+            //.ToList();
+
+       // return View(produtos);
+
+    //}
 
     public IActionResult Cadastros() 
     {

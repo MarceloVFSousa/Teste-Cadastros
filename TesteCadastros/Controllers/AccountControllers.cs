@@ -57,7 +57,7 @@ namespace TesteCadastros.Controllers
             if (result.Succeeded)
             {
                 //return LocalRedirect(returnUrl ?? Url.Action("Index", "Dashboard"));
-                return LocalRedirect(returnUrl ?? Url.Action("Dashboard", "Home"));
+                return LocalRedirect(returnUrl ?? Url.Action("Index", "Dashboard"));
             }
 
             ModelState.AddModelError(string.Empty, "Usuário ou senha inválidos.");
