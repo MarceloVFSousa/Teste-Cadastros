@@ -46,6 +46,7 @@ namespace TesteCadastros.Controllers
                     DataPrevisao = p.DataPrevisao,
                     Cidade = p.Cidade,
                     Estado = p.Estado,
+                    Rua = p.Rua,
                     Cep = p.Cep
                 })
                 .ToListAsync(); // Converte para List antes da paginação

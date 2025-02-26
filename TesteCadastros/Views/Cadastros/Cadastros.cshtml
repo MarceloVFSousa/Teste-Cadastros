@@ -13,7 +13,6 @@
         <div class="alert alert-danger">@TempData["MensagemErro"]</div>
     }
 
-    <!-- <form asp-controller="Views" asp-action="Cadastros" method="post">-->
     <form asp-controller="Cadastros" asp-action="Cadastros" method="post">
         <div class="form-row">
             <div class="form-group col-md-6">
@@ -39,12 +38,12 @@
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label asp-for="Cidade">Cidade</label>
-                <input asp-for="Cidade" class="form-control" placeholder="Cidade" required>
+                <input asp-for="Cidade" class="form-control" id="Cidade" placeholder="Cidade" required>
                 <span asp-validation-for="Cidade" class="text-danger"></span>
             </div>
             <div class="form-group col-md-4">
                 <label asp-for="Estado">Estado</label>
-                <select asp-for="Estado" class="form-control" required>
+                <select asp-for="Estado" class="form-control" id="Estado" required>
                     <option selected disabled>Selecione...</option>
                     <option>Acre</option>
                     <option>Alagoas</option>
@@ -78,8 +77,12 @@
             </div>
             <div class="form-group col-md-2">
                 <label asp-for="Cep">CEP</label>
-                <input asp-for="Cep" class="form-control" placeholder="CEP" id="cep" required>
+                <input asp-for="Cep" class="form-control" placeholder="CEP" id="Cep" required>
                 <span asp-validation-for="Cep" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="Rua">Rua</label>
+                <input type="text" id="Rua" name="Rua" class="form-control" required>
             </div>
         </div>
         <button type="submit" class="btn btn-primary">Cadastrar</button>
@@ -89,4 +92,39 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            console.log("Script carregado!");
+
+            // Aplica a máscara ao campo de CEP
+            $("#Cep").mask("00000-000");
+
+            $("#Cep").on("input", function () {
+                let cep = $(this).val().replace(/\D/g, ''); // Remove caracteres não numéricos
+                console.log("CEP digitado:", cep);
+
+                if (cep.length === 8) {
+                    console.log("Chamando a API ViaCEP...");
+
+                    $.get(`https://viacep.com.br/ws/${cep}/json/`, function (data) {
+                        console.log("Resposta da API:", data);
+
+                        if (!("erro" in data)) {
+                            $("#Rua").val(data.logradouro);
+                            $("#Cidade").val(data.localidade);
+                            $("#Estado").val(data.estado); // Ajuste para pegar corretamente o estado
+                            console.log("Endereço preenchido com sucesso!");
+                        } else {
+                            alert("CEP não encontrado.");
+                            console.log("Erro: CEP não encontrado");
+                        }
+                    }).fail(function () {
+                        console.log("Erro ao chamar a API ViaCEP");
+                    });
+                }
+            });
+        });
+    </script>
 }

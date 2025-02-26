@@ -74,7 +74,8 @@ namespace TesteCadastros.Controllers
                 else if (model is Produto produto)
                 {
                     produto.DataRegistro = DateTime.Now;
-                    Console.WriteLine($"Dados Recebidos -> Nome: {produto.NomeProduto}, Preço: {produto.Preco}");
+                    produto.Rua = (model as Produto).Rua; // Adiciona a Rua corretamente
+                    Console.WriteLine($"Dados Recebidos -> Nome: {produto.NomeProduto}, Preço: {produto.Preco}, Rua: {produto.Rua}");
                     _context.Produtos.Add(produto);
                 }
 

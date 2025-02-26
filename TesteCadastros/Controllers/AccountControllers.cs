@@ -49,7 +49,7 @@ namespace TesteCadastros.Controllers
 
             if (user == null)
             {
-                ModelState.AddModelError(string.Empty, "Usuário ou senha inválidos.");
+                ModelState.AddModelError(string.Empty, "Usuário ou senha inválidos.");  
                 return View(model);
             }
 

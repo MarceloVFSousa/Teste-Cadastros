@@ -20,6 +20,7 @@ namespace TesteCadastros.Models
         public string Estado { get; set; }
         [Required]
         public string Cep { get; set; }
+        public string Rua {  get; set; }
 
     }
 }
